@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TTD FastFill Pro</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="url(#bolt-grad)" stroke="#FFA726" stroke-width="1.5" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="bolt-grad" x1="3" y1="2" x2="21" y2="22" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#FFE082"/>
+                <stop offset="1" stop-color="#FF9800"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>TTD FastFill <span class="badge-pro">PRO</span></h1>
+          <p class="subtitle">100% Free & Offline Booking Assistant</p>
+        </div>
+      </div>
+      <div class="privacy-tag">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Offline</span>
+      </div>
+    </header>
+
+    <!-- Quick Profile Selector Bar -->
+    <div class="profile-quick-bar">
+      <label for="activeProfileSelect">Active Profile:</label>
+      <select id="activeProfileSelect" class="profile-select"></select>
+      <button id="btnNewProfile" class="icon-btn" title="Create New Preset Profile">+</button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-tab="tab-pilgrims">
+        <span class="tab-icon">👥</span>
+        <span>Pilgrims</span>
+      </button>
+      <button class="nav-tab" data-tab="tab-contact">
+        <span class="tab-icon">📍</span>
+        <span>Contact</span>
+      </button>
+      <button class="nav-tab" data-tab="tab-nri">
+        <span class="tab-icon">🌐</span>
+        <span>NRI</span>
+      </button>
+      <button class="nav-tab" data-tab="tab-profiles">
+        <span class="tab-icon">💾</span>
+        <span>Profiles</span>
+      </button>
+    </nav>
+
+    <!-- Tab Panels Container -->
+    <main class="tab-content">
+      
+      <!-- TAB 1: PILGRIMS -->
+      <section id="tab-pilgrims" class="tab-panel active">
+        <div class="panel-header">
+          <label>Number of Pilgrims:</label>
+          <div class="pilgrim-count-selector">
+            <button class="count-btn active" data-count="1">1</button>
+            <button class="count-btn" data-count="2">2</button>
+            <button class="count-btn" data-count="3">3</button>
+            <button class="count-btn" data-count="4">4</button>
+            <button class="count-btn" data-count="5">5</button>
+            <button class="count-btn" data-count="6">6</button>
+          </div>
+        </div>
+
+        <div id="pilgrimAccordions" class="accordion-group">
+          <!-- Dynamically populated up to 6 pilgrims -->
+        </div>
+      </section>
+
+      <!-- TAB 2: CONTACT & ADDRESS -->
+      <section id="tab-contact" class="tab-panel">
+        <div class="form-section">
+          <h3>Contact Details</h3>
+          <div class="form-row">
+            <div class="field-group">
+              <label for="contactMobile">Mobile Number *</label>
+              <input type="tel" id="contactMobile" placeholder="e.g. 9876543210" maxlength="10">
+            </div>
+            <div class="field-group">
+              <label for="contactEmail">Email Address *</label>
+              <input type="email" id="contactEmail" placeholder="e.g. devotee@example.com">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Address & Details</h3>
+          <div class="field-group full-width">
+            <label for="addressLine1">Address Line 1</label>
+            <input type="text" id="addressLine1" placeholder="Door No, Street Name, Landmark">
+          </div>
+          <div class="field-group full-width">
+            <label for="addressLine2">Address Line 2 (Optional)</label>
+            <input type="text" id="addressLine2" placeholder="Area / Locality">
+          </div>
+          <div class="form-row">
+            <div class="field-group">
+              <label for="addressState">State</label>
+              <select id="addressState">
+                <option value="">Select State</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="West Bengal">West Bengal</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label for="addressCity">City / Town</label>
+              <input type="text" id="addressCity" placeholder="City name">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field-group">
+              <label for="addressPincode">PIN Code</label>
+              <input type="text" id="addressPincode" placeholder="6-digit PIN" maxlength="6">
+            </div>
+            <div class="field-group">
+              <label for="gotram">Gotram (Optional)</label>
+              <input type="text" id="gotram" placeholder="e.g. Bharadwaja">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: NRI DETAILS -->
+      <section id="tab-nri" class="tab-panel">
+        <div class="form-section">
+          <div class="toggle-row">
+            <label for="nriEnabled" class="toggle-label">
+              <span class="label-title">Enable NRI / International Mode</span>
+              <span class="label-desc">Autofills passport and visa details for NRI pilgrims</span>
+            </label>
+            <input type="checkbox" id="nriEnabled" class="toggle-switch">
+          </div>
+
+          <div id="nriFieldsContainer" class="nri-fields disabled">
+            <div class="form-row">
+              <div class="field-group">
+                <label for="nriPassportNo">Passport Number</label>
+                <input type="text" id="nriPassportNo" placeholder="Passport No.">
+              </div>
+              <div class="field-group">
+                <label for="nriCountry">Country of Residence</label>
+                <input type="text" id="nriCountry" placeholder="e.g. USA, UK, UAE">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field-group full-width">
+                <label for="nriVisaType">Visa / OCI Type</label>
+                <select id="nriVisaType">
+                  <option value="OCI Card">OCI Card</option>
+                  <option value="PIO Card">PIO Card</option>
+                  <option value="Tourist Visa">Tourist Visa</option>
+                  <option value="Work Permit">Work Permit / Employment</option>
+                  <option value="Student Visa">Student Visa</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: PROFILES & BACKUP -->
+      <section id="tab-profiles" class="tab-panel">
+        <div class="form-section">
+          <h3>Preset Profiles</h3>
+          <div class="profile-input-group">
+            <input type="text" id="profileNameInput" placeholder="New Profile Name (e.g. Family Trip)">
+            <button id="btnSaveNewProfile" class="btn secondary">Save Profile</button>
+          </div>
+          
+          <div id="savedProfilesList" class="profiles-list">
+            <!-- Populated via popup.js -->
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Backup & Restore</h3>
+          <p class="section-desc">Export your saved profiles to JSON for safekeeping or transfer to another browser.</p>
+          <div class="action-buttons-row">
+            <button id="btnExportJSON" class="btn outline">📥 Export Profiles (JSON)</button>
+            <label for="importFileInput" class="btn outline file-label">
+              📤 Import Profiles
+              <input type="file" id="importFileInput" accept=".json" style="display:none;">
+            </label>
+          </div>
+        </div>
+
+        <div class="form-section danger-zone">
+          <button id="btnClearAll" class="btn danger-link">⚠️ Reset All Stored Profiles</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer Action Toolbar -->
+    <footer class="app-footer">
+      <div id="toastNotification" class="toast-bar hidden">Details Saved Successfully!</div>
+      <div class="footer-actions">
+        <button id="btnSaveDetails" class="btn secondary-glow">
+          💾 Save Details
+        </button>
+        <button id="btnFillActiveTab" class="btn primary-glow">
+          ⚡ Fill Active Tab
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

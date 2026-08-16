@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tirumala Tirupati Devasthanams - Online Pilgrim Booking Portal (Test Bench)</title>
+  <style>
+    :root {
+      --ttd-maroon: #800000;
+      --ttd-gold: #ffc107;
+      --ttd-gold-dark: #d39e00;
+      --bg-gray: #f4f6f9;
+      --card-border: #e2e8f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: var(--bg-gray);
+      color: #333;
+      padding-bottom: 60px;
+    }
+
+    /* Top Portal Header */
+    .portal-header {
+      background: linear-gradient(135deg, var(--ttd-maroon) 0%, #4a0000 100%);
+      color: #fff;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 4px solid var(--ttd-gold);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .brand-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .emblem-circle {
+      width: 48px;
+      height: 48px;
+      background: var(--ttd-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .brand-title h1 {
+      font-size: 20px;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+
+    .brand-title p {
+      font-size: 12px;
+      color: var(--ttd-gold);
+    }
+
+    .session-badge {
+      background: rgba(255, 193, 7, 0.2);
+      border: 1px solid var(--ttd-gold);
+      color: var(--ttd-gold);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    /* Main Form Container */
+    .container {
+      max-width: 960px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    .booking-card {
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      background: #fafafa;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-header h2 {
+      font-size: 16px;
+      color: var(--ttd-maroon);
+      font-weight: 700;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    /* Pilgrim Card Rows */
+    .pilgrim-card {
+      background: #fdfdfd;
+      border: 1px solid #cbd5e1;
+      border-left: 4px solid var(--ttd-maroon);
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .pilgrim-card-header {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--ttd-maroon);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .form-group input,
+    .form-group select {
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--ttd-maroon);
+      box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.1);
+    }
+
+    .btn-submit {
+      background: var(--ttd-maroon);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+
+    .btn-submit:hover {
+      background: #600000;
+    }
+
+    /* Reactive Log Box */
+    .log-card {
+      background: #1e293b;
+      color: #38bdf8;
+      font-family: monospace;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .log-card h3 {
+      color: #f59e0b;
+      margin-bottom: 8px;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Portal Header -->
+  <header class="portal-header">
+    <div class="brand-container">
+      <div class="emblem-circle">🛕</div>
+      <div class="brand-title">
+        <h1>TIRUMALA TIRUPATI DEVASTHANAMS</h1>
+        <p>Official Online Pilgrim Booking Portal (Test Bench)</p>
+      </div>
+    </div>
+    <div class="session-badge">
+      ⏱️ Slot Time Remaining: 09:45
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Test Bench Control Bar -->
+    <div class="booking-card" style="background: #fffbe6; border-color: #ffe58f;">
+      <div class="card-body" style="display:flex; align-items:center; justify-space-between; flex-wrap:wrap; gap:12px;">
+        <div>
+          <strong style="color:#d48806;">🧪 FastFill Pro Local Test Bench</strong>
+          <p style="font-size:12px; color:#8c6800;">Use the extension popup or the floating FastFill button in the bottom right to autofill this SPA form instantly.</p>
+        </div>
+        <button onclick="injectScriptManual()" style="background:#d48806; color:#fff; border:none; padding:6px 14px; border-radius:4px; font-weight:600; cursor:pointer;">
+          Inject content.js Manually
+        </button>
+      </div>
+    </div>
+
+    <form id="ttdBookingForm" onsubmit="event.preventDefault(); submitBooking();">
+      
+      <!-- PILGRIMS SECTION -->
+      <div class="booking-card">
+        <div class="card-header">
+          <h2>1. Devotee / Pilgrim Details (Up to 6)</h2>
+          <span style="font-size:12px; color:#64748b;">Step 1 of 2</span>
+        </div>
+        <div class="card-body">
+
+          <!-- Pilgrim Card 1 -->
+          <div class="pilgrim-card">
+            <div class="pilgrim-card-header">
+              <span>Pilgrim 1 (Primary Devotee)</span>
+              <span style="font-size:11px; background:#e2e8f0; padding:2px 8px; border-radius:10px; color:#334155;">Row #1</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Name (as per Photo ID) *</label>
+                <input type="text" name="pilgrimName_0" formcontrolname="devoteeName" placeholder="Enter Full Name">
+              </div>
+              <div class="form-group">
+                <label>Age *</label>
+                <input type="number" name="pilgrimAge_0" formcontrolname="age" placeholder="Age">
+              </div>
+              <div class="form-group">
+                <label>Gender *</label>
+                <select name="pilgrimGender_0" formcontrolname="gender">
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Transgender">Transgender</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Photo ID Type *</label>
+                <select name="pilgrimIdType_0" formcontrolname="idProofType">
+                  <option value="">Select Photo ID</option>
+                  <option value="Aadhaar Card">Aadhaar Card</option>
+                  <option value="Passport">Passport</option>
+                  <option value="Voter ID">Voter ID</option>
+                  <option value="PAN Card">PAN Card</option>
+                  <option value="Driving License">Driving License</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Photo ID Number *</label>
+                <input type="text" name="pilgrimIdNo_0" formcontrolname="idProofNo" placeholder="Photo ID Number">
+              </div>
+            </div>
+          </div>
+
+          <!-- Pilgrim Card 2 -->
+          <div class="pilgrim-card">
+            <div class="pilgrim-card-header">
+              <span>Pilgrim 2</span>
+              <span style="font-size:11px; background:#e2e8f0; padding:2px 8px; border-radius:10px; color:#334155;">Row #2</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Name (as per Photo ID) *</label>
+                <input type="text" name="pilgrimName_1" formcontrolname="devoteeName" placeholder="Enter Full Name">
+              </div>
+              <div class="form-group">
+                <label>Age *</label>
+                <input type="number" name="pilgrimAge_1" formcontrolname="age" placeholder="Age">
+              </div>
+              <div class="form-group">
+                <label>Gender *</label>
+                <select name="pilgrimGender_1" formcontrolname="gender">
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Transgender">Transgender</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Photo ID Type *</label>
+                <select name="pilgrimIdType_1" formcontrolname="idProofType">
+                  <option value="">Select Photo ID</option>
+                  <option value="Aadhaar Card">Aadhaar Card</option>
+                  <option value="Passport">Passport</option>
+                  <option value="Voter ID">Voter ID</option>
+                  <option value="PAN Card">PAN Card</option>
+                  <option value="Driving License">Driving License</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Photo ID Number *</label>
+                <input type="text" name="pilgrimIdNo_1" formcontrolname="idProofNo" placeholder="Photo ID Number">
+              </div>
+            </div>
+          </div>
+
+          <!-- Pilgrim Card 3 -->
+          <div class="pilgrim-card">
+            <div class="pilgrim-card-header">
+              <span>Pilgrim 3</span>
+              <span style="font-size:11px; background:#e2e8f0; padding:2px 8px; border-radius:10px; color:#334155;">Row #3</span>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Name (as per Photo ID) *</label>
+                <input type="text" name="pilgrimName_2" formcontrolname="devoteeName" placeholder="Enter Full Name">
+              </div>
+              <div class="form-group">
+                <label>Age *</label>
+                <input type="number" name="pilgrimAge_2" formcontrolname="age" placeholder="Age">
+              </div>
+              <div class="form-group">
+                <label>Gender *</label>
+                <select name="pilgrimGender_2" formcontrolname="gender">
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Transgender">Transgender</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Photo ID Type *</label>
+                <select name="pilgrimIdType_2" formcontrolname="idProofType">
+                  <option value="">Select Photo ID</option>
+                  <option value="Aadhaar Card">Aadhaar Card</option>
+                  <option value="Passport">Passport</option>
+                  <option value="Voter ID">Voter ID</option>
+                  <option value="PAN Card">PAN Card</option>
+                  <option value="Driving License">Driving License</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Photo ID Number *</label>
+                <input type="text" name="pilgrimIdNo_2" formcontrolname="idProofNo" placeholder="Photo ID Number">
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CONTACT & ADDRESS SECTION -->
+      <div class="booking-card">
+        <div class="card-header">
+          <h2>2. Contact & Residential Address</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Mobile Number *</label>
+              <input type="tel" name="mobileNumber" id="mobileNumber" formcontrolname="mobile" placeholder="10-digit Mobile">
+            </div>
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" name="emailId" id="emailId" formcontrolname="email" placeholder="Email Address">
+            </div>
+            <div class="form-group" style="grid-column: span 2;">
+              <label>Address Line 1 *</label>
+              <input type="text" name="addressLine1" id="addressLine1" formcontrolname="address1" placeholder="Door No, Street">
+            </div>
+            <div class="form-group">
+              <label>State *</label>
+              <select name="state" id="stateSelect" formcontrolname="state">
+                <option value="">Select State</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Delhi">Delhi</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>City / Town *</label>
+              <input type="text" name="cityName" id="cityName" formcontrolname="city" placeholder="City">
+            </div>
+            <div class="form-group">
+              <label>PIN Code *</label>
+              <input type="text" name="pincode" id="pincode" formcontrolname="pincode" placeholder="PIN Code">
+            </div>
+            <div class="form-group">
+              <label>Gotram</label>
+              <input type="text" name="gotram" id="gotram" formcontrolname="gotram" placeholder="Gotram Name">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- NRI / INTERNATIONAL SECTION -->
+      <div class="booking-card">
+        <div class="card-header">
+          <h2>3. International / NRI Details (Optional)</h2>
+        </div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Passport Number</label>
+              <input type="text" name="passportNumber" formcontrolname="passport" placeholder="Passport No">
+            </div>
+            <div class="form-group">
+              <label>Country of Residence</label>
+              <input type="text" name="countryName" formcontrolname="country" placeholder="Country">
+            </div>
+            <div class="form-group">
+              <label>Visa / OCI Type</label>
+              <select name="visaType" formcontrolname="visa">
+                <option value="OCI Card">OCI Card</option>
+                <option value="PIO Card">PIO Card</option>
+                <option value="Tourist Visa">Tourist Visa</option>
+                <option value="Employment">Employment</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Action -->
+      <button type="submit" class="btn-submit">Proceed to Payment / Slot Confirmation ➔</button>
+    </form>
+
+    <!-- Reactive SPA Listener Console -->
+    <div style="margin-top: 24px;">
+      <div class="log-card">
+        <h3>⚡ Reactive SPA State Console Log</h3>
+        <div id="consoleLog">Listening for reactive form input and change events...</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Reactive SPA Form Listener script -->
+  <script>
+    const logEl = document.getElementById('consoleLog');
+    const form = document.getElementById('ttdBookingForm');
+
+    function addLog(msg) {
+      const line = document.createElement('div');
+      line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      logEl.prepend(line);
+    }
+
+    form.addEventListener('input', (e) => {
+      addLog(`INPUT event fired on [${e.target.name || e.target.id || e.target.tagName}] -> value = "${e.target.value}"`);
+    });
+
+    form.addEventListener('change', (e) => {
+      addLog(`CHANGE event fired on [${e.target.name || e.target.id || e.target.tagName}] -> value = "${e.target.value}"`);
+    });
+
+    function submitBooking() {
+      const formData = new FormData(form);
+      const data = {};
+      formData.forEach((val, key) => data[key] = val);
+      alert('🎉 Booking Submitted!\n\nPayload:\n' + JSON.stringify(data, null, 2));
+    }
+
+    function injectScriptManual() {
+      if (!window.__TTD_FASTFILL_INJECTED__) {
+        const s = document.createElement('script');
+        s.src = 'content.js';
+        document.body.appendChild(s);
+        addLog('Manually injected content.js onto test page!');
+      } else {
+        addLog('content.js already injected!');
+      }
+    }
+  </script>
+  <script src="content.js"></script>
+</body>
+</html>

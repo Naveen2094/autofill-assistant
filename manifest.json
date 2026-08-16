@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "TTD FastFill Pro",
+  "version": "1.0.0",
+  "description": "100% free, offline, privacy-first autofill assistant for TTD Seva, Darshan, and Accommodation bookings.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.tirupatibalaji.ap.gov.in/*",
+    "https://*.ttdsevaonline.com/*",
+    "https://ttdevasthanams.ap.gov.in/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "TTD FastFill Pro",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.tirupatibalaji.ap.gov.in/*",
+        "https://*.ttdsevaonline.com/*",
+        "https://ttdevasthanams.ap.gov.in/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "trigger_autofill": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Trigger TTD FastFill Pro instant form filling"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
